@@ -134,5 +134,6 @@ def transmit(text):
 if __name__ == "__main__":
     try:
         transmit(sys.argv[1])
+        gpio.cleanup()
     except IndexError:
         quit("usage: ./morse.py '[text]'")
