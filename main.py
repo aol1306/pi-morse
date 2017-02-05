@@ -116,4 +116,4 @@ def transmit(text):
             word_sleep()
         i += 1
 
-transmit('Mad 8deaj9 jd8 aejdAE* AEd *AED *euADED')
+transmit('Mary had a little lamb.')
