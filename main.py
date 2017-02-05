@@ -3,7 +3,7 @@ import time
 import logging
 
 # only set dot length
-DOT = 0.3
+DOT = 0.1
 
 
 DASH = 3*DOT
@@ -14,6 +14,42 @@ CODE = {
 'c' : '-.-.',
 'd' : '-..',
 'e' : '.',
+'f' : '..-.',
+'g' : '--.',
+'h' : '....',
+'i' : '..',
+'j' : '.---',
+'k' : '-.-',
+'l' : '.-..',
+'m' : '--',
+'n' : '-.',
+'o' : '---',
+'p' : '.--.',
+'q' : '--.-',
+'r' : '.-.',
+'s' : '...',
+'t' : '-',
+'u' : '..-',
+'v' : '...-',
+'w' : '.--',
+'x' : '-..-',
+'y' : '-.--',
+'z' : '--..',
+'.' : '.-.-.-',
+',' : '--..--',
+'?' : '..--..',
+'/' : '-..-.',
+'@' : '.--.-.',
+'1' : '.----',
+'2' : '..---',
+'3' : '...--',
+'4' : '....-',
+'5' : '.....',
+'6' : '-....',
+'7' : '--...',
+'8' : '---..',
+'9' : '----.',
+'0' : '-----',
 }
 
 logging.basicConfig(level=logging.DEBUG)
@@ -46,7 +82,7 @@ def transmit_letter(letter):
     letter = letter.lower()
     logging.debug("transmitting letter "+letter)
     try:
-        code = CODE[letter]
+        code = CODE[str(letter)]
     except KeyError:
         logging.error("no such letter")
         return
@@ -80,4 +116,4 @@ def transmit(text):
             word_sleep()
         i += 1
 
-transmit('ab ab')
+transmit('Mad 8deaj9 jd8 aejdAE* AEd *AED *euADED')
