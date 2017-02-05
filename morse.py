@@ -1,12 +1,14 @@
 #!/usr/bin/python3
 import time
 import logging
+import sys
+
+LED_CHANNEL = 3
 
 # only set dot length
 DOT = 0.1
-
-
 DASH = 3*DOT
+
 
 CODE = {
 'a' : '.-',
@@ -54,17 +56,30 @@ CODE = {
 
 logging.basicConfig(level=logging.DEBUG)
 
+try:
+    import RPi.GPIO as gpio
+except RuntimeError:
+    quit("Error importing RPi.GPIO. Try running with sudo.")
+
+gpio.setmode(gpio.BCM)
+gpio.setwarnings(False)
+gpio.setup(LED_CHANNEL, gpio.OUT, initial=gpio.LOW)
+
 def dot():
     logging.debug("dot")
     logging.info("singal on")
+    gpio.output(LED_CHANNEL, True)
     time.sleep(DOT)
     logging.info("singal off")
+    gpio.output(LED_CHANNEL, False)
 
 def dash():
     logging.debug("dash")
     logging.info("singal on")
+    gpio.output(LED_CHANNEL, True)
     time.sleep(DASH)
     logging.info("singal off")
+    gpio.output(LED_CHANNEL, False)
 
 def part_of_letter_sleep():
     logging.debug("part of letter sleep")
@@ -116,4 +131,8 @@ def transmit(text):
             word_sleep()
         i += 1
 
-transmit('Mary had a little lamb.')
+if __name__ == "__main__":
+    try:
+        transmit(sys.argv[1])
+    except IndexError:
+        quit("usage: ./morse.py '[text]'")
